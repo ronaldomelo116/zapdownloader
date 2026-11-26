@@ -88,6 +88,12 @@ async function ligarBot() {
             const pedido = pedidosPendentes.get(chaveUsuario);
             pedidosPendentes.delete(chaveUsuario); // Consome a solicitação
 
+            console.log(`\n⚙️ [PROCESSANDO PEDIDO]`);
+            console.log(`   👤 Usuário: ${autorMsg}`);
+            console.log(`   📌 Plataforma: ${pedido.plataforma}`);
+            console.log(`   🔢 Opção escolhida: ${opcaoEscolhida}`);
+            console.log(`   🔗 URL: ${pedido.url}`);
+
             try {
                 if (opcaoEscolhida === '1') {
                     // OPÇÃO 1: Vídeo Normal (player padrão do WhatsApp)
@@ -140,9 +146,9 @@ async function ligarBot() {
                 console.log(`✅ Pedido (opção ${opcaoEscolhida}) do ${pedido.plataforma} finalizado com sucesso!`);
                 return;
             } catch (erro) {
-                console.error('❌ Erro ao processar opção do menu:', erro.message);
+                console.error(`❌ Erro ao processar opção ${opcaoEscolhida} (${pedido.plataforma}):`, erro.message);
                 await socket.sendMessage(deOndeVeio, { 
-                    text: `❌ *Falha ao baixar na opção ${opcaoEscolhida}.*\n\nMotivo: ${erro.message || 'Erro inesperado'}\n_Dica: O vídeo pode ser privado ou ter direitos protegidos._` 
+                    text: `❌ *Falha ao baixar na opção ${opcaoEscolhida}.*\n\n*Motivo:* ${erro.message || 'Erro inesperado'}\n\n💡 *Dica:* Certifique-se de que o vídeo seja de um perfil público e não possua restrições de idade.` 
                 }, { quoted: msg });
                 return;
             }
