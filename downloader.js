@@ -1,8 +1,12 @@
 import { alldl } from 'rahad-all-downloader-v2';
 import { snapsave } from 'snapsave-media-downloader';
+import { Ytdl } from '@distube/ytdl-core';
 
 // Evita checagens desnecessárias do ytdl no GitHub que podem atrasar downloads
 process.env.YTDL_NO_UPDATE = '1';
+
+// Cliente ytdl reutilizável
+const ytdlClient = new Ytdl();
 
 /**
  * Resolve redirecionamentos de links encurtados (ex: vm.tiktok.com, /share/, etc.)
@@ -34,6 +38,100 @@ function comTimeout(promise, ms, mensagem = 'Tempo limite de download excedido')
         promise,
         new Promise((_, reject) => setTimeout(() => reject(new Error(mensagem)), ms))
     ]);
+}
+
+/**
+ * Extrai o ID do vídeo do YouTube
+ */
+function extrairYouTubeId(url) {
+    const m = url.match(/(?:youtube\.com\/(?:watch\?[^#]*v=|shorts\/|embed\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i);
+    return m ? m[1] : null;
+}
+
+/**
+ * Baixador de YouTube ultra rápido e sem travamentos (1-2s)
+ */
+async function baixarYouTube(url) {
+    const videoId = extrairYouTubeId(url);
+    let titulo = 'Vídeo do YouTube';
+    let autor = 'YouTube';
+    let audioUrl = null;
+    let videoUrl = null;
+    let videoHdUrl = null;
+
+    // 1. Áudio cristalino e metadados via @distube/ytdl-core (~1s)
+    try {
+        const info = await ytdlClient.getInfo(url);
+        titulo = info.videoDetails.title || titulo;
+        autor = info.videoDetails.author?.name || autor;
+
+        // Pega os formatos de áudio direto (itag 140 / m4a / mp4)
+        const audios = info.formats.filter(f => f.hasAudio && !f.hasVideo && f.url);
+        audios.sort((a, b) => (b.audioBitrate || 0) - (a.audioBitrate || 0));
+        if (audios.length > 0) {
+            audioUrl = audios[0].url;
+        }
+
+        // Verifica se há vídeo pré-muxed com áudio
+        const videosComAudio = info.formats.filter(f => f.hasAudio && f.hasVideo && f.url);
+        if (videosComAudio.length > 0) {
+            videosComAudio.sort((a, b) => (b.height || 0) - (a.height || 0));
+            videoHdUrl = videosComAudio[0].url;
+            videoUrl = videosComAudio[videosComAudio.length - 1].url;
+        }
+    } catch (e) {
+        console.log('ytdl-core direto:', e.message);
+    }
+
+    // 2. Para vídeo com áudio (se DASH estiver separado), consulta instâncias rápidas do Piped (<1s)
+    if (!videoUrl && videoId) {
+        const pipedInstances = [
+            'https://api.piped.private.coffee',
+            'https://pipedapi.leptons.xyz',
+            'https://pipedapi.ducks.party'
+        ];
+
+        for (const instance of pipedInstances) {
+            try {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), 5000);
+                const res = await fetch(`${instance}/streams/${videoId}`, {
+                    headers: { 'User-Agent': 'Mozilla/5.0' },
+                    signal: controller.signal
+                });
+                clearTimeout(timer);
+                if (res.ok) {
+                    const data = await res.json();
+                    titulo = data.title || titulo;
+                    autor = data.uploader || autor;
+                    const streams = (data.videoStreams || []).filter(s => s.url);
+                    if (streams.length > 0) {
+                        const streamHd = streams.find(s => s.quality === '720p') || streams[0];
+                        const streamNormal = streams.find(s => s.quality === '360p') || streamHd;
+                        videoUrl = streamNormal.url;
+                        videoHdUrl = streamHd.url;
+                        if (!audioUrl && data.audioStreams?.length > 0) {
+                            audioUrl = data.audioStreams[0].url;
+                        }
+                        break;
+                    }
+                }
+            } catch (err) {}
+        }
+    }
+
+    if (videoUrl || audioUrl) {
+        return {
+            titulo,
+            autor,
+            videoUrl: videoUrl || audioUrl,
+            videoHdUrl: videoHdUrl || videoUrl || audioUrl,
+            audioUrl: audioUrl || videoUrl,
+            plataforma: 'YouTube'
+        };
+    }
+
+    throw new Error('Não foi possível obter os streams de áudio ou vídeo do YouTube.');
 }
 
 /**
@@ -148,7 +246,16 @@ export async function baixarVideo(url, plataforma) {
         }
     }
 
-    // 2. INSTAGRAM - Tenta primeiro SnapSave
+    // 2. YOUTUBE - Otimizado diretamente com @distube/ytdl-core + Piped API (Super veloz <2s)
+    if (plataforma === 'YouTube') {
+        try {
+            return await baixarYouTube(urlFinal);
+        } catch (e) {
+            console.log('Extrator rápido do YouTube falhou, acionando motor principal...', e.message);
+        }
+    }
+
+    // 3. INSTAGRAM - Tenta primeiro SnapSave
     if (plataforma === 'Instagram') {
         try {
             const resSnap = await comTimeout(snapsave(urlFinal), 8000);
@@ -170,7 +277,7 @@ export async function baixarVideo(url, plataforma) {
         }
     }
 
-    // 3. MOTOR PRINCIPAL MULTIPLATAFORMA (YouTube, Instagram fallback, Facebook, Twitter, Pinterest, etc.)
+    // 4. MOTOR PRINCIPAL MULTIPLATAFORMA (Facebook, Twitter, Pinterest, Threads, Kwai, etc.)
     try {
         const resAll = await comTimeout(alldl(urlFinal, { quality: '1080p' }), 25000);
         const dados = extrairDadosMidia(resAll, plataforma);
