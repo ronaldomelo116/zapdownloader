@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZapDownloader - Baixe TikTok, Reels e Shorts no WhatsApp</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="bi bi-cloud-arrow-down-fill"></i>
+                </div>
+                <span>ZapDownloader</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+
+            <a href="https://wa.me/?text=Olá!%20Quero%20testar%20o%20bot%20de%20download." target="_blank" class="btn-cta">
+                <i class="bi bi-whatsapp"></i>
+                <span>Chamar no WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <div class="badge-status">
+                <span class="badge-dot"></span>
+                <i class="bi bi-lightning-charge-fill" style="font-size: 0.9rem;"></i>
+                <span>Bot Online 24/7 no WhatsApp</span>
+            </div>
+
+            <h1>Baixe Vídeos em <span>HD Original</span> Direto no WhatsApp</h1>
+            <p>Basta enviar o link do TikTok, Instagram Reels ou YouTube Shorts. Escolha o formato e receba o arquivo na hora com qualidade máxima sem perda.</p>
+
+            <div class="hero-actions">
+                <a href="https://wa.me/?text=Olá!%20Quero%20testar%20o%20bot%20de%20download." target="_blank" class="btn-cta" style="padding: 14px 32px; font-size: 1.05rem;">
+                    <i class="bi bi-whatsapp"></i>
+                    <span>Começar a Usar Grátis</span>
+                </a>
+                <a href="#como-funciona" class="btn-secondary">
+                    <i class="bi bi-play-circle-fill" style="color: var(--primary-color);"></i>
+                    <span>Ver Demonstração</span>
+                </a>
+            </div>
+
+            <!-- SIMULADOR INTERATIVO WHATSAPP -->
+            <div class="chat-simulator">
+                <div class="chat-header">
+                    <div class="bot-avatar">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <div class="bot-info">
+                        <h4>ZapDownloader Bot</h4>
+                        <span>online agora</span>
+                    </div>
+                </div>
+
+                <div class="chat-body">
+                    <!-- Mensagem do usuário -->
+                    <div class="bubble bubble-user">
+                        https://www.tiktok.com/@criador/video/710659431229
+                        <div class="bubble-time">21:40</div>
+                    </div>
+
+                    <!-- Resposta com o Menu do Bot -->
+                    <div class="bubble bubble-bot">
+                        <i class="bi bi-camera-reels-fill" style="color: var(--primary-color);"></i> <strong>Vídeo do TikTok detectado!</strong><br><br>
+                        Como você deseja baixar? Responda com o <strong>número</strong>:<br><br>
+                        <i class="bi bi-1-circle-fill" style="color: var(--primary-color);"></i> - <i class="bi bi-phone"></i> <strong>Vídeo Normal</strong> (Player no chat)<br>
+                        <i class="bi bi-2-circle-fill" style="color: var(--primary-color);"></i> - <i class="bi bi-gem"></i> <strong>Vídeo HD Original</strong> (Qualidade máxima)<br>
+                        <i class="bi bi-3-circle-fill" style="color: var(--primary-color);"></i> - <i class="bi bi-music-note-beamed"></i> <strong>Apenas Áudio</strong> (Música MP3)<br><br>
+                        <i class="bi bi-stopwatch" style="color: var(--muted-text);"></i> <em>Envie 1, 2 ou 3 em até 2 minutos.</em>
+                        <div class="bubble-time">21:40</div>
+                    </div>
+
+                    <!-- Escolha do Usuário -->
+                    <div class="bubble bubble-user">
+                        2
+                        <div class="bubble-time">21:41</div>
+                    </div>
+
+                    <!-- Bot enviando o arquivo HD -->
+                    <div class="bubble bubble-bot">
+                        <i class="bi bi-gem" style="color: var(--primary-color);"></i> <strong>Arquivo Original HD Enviado:</strong>
+                        <div class="file-card">
+                            <i class="bi bi-file-earmark-play-fill"></i>
+                            <div>
+                                <strong>video_1080p_sem_marca.mp4</strong><br>
+                                <small style="color: var(--muted-text);">18.4 MB • MP4 HD</small>
+                            </div>
+                        </div>
+                        <div class="bubble-time">21:41</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLATAFORMAS SUPORTADAS -->
+    <section class="platforms-section">
+        <div class="container">
+            <p class="platforms-title">Compatível com as principais redes sociais</p>
+            <div class="platforms-grid">
+                <div class="platform-item">
+                    <i class="bi bi-tiktok" style="color: #00F2FE;"></i>
+                    <span>TikTok (Sem Marca)</span>
+                </div>
+                <div class="platform-item">
+                    <i class="bi bi-instagram" style="color: #E1306C;"></i>
+                    <span>Instagram Reels</span>
+                </div>
+                <div class="platform-item">
+                    <i class="bi bi-youtube" style="color: #FF0000;"></i>
+                    <span>YouTube Shorts</span>
+                </div>
+                <div class="platform-item">
+                    <i class="bi bi-facebook" style="color: #1877F2;"></i>
+                    <span>Facebook Vídeos</span>
+                </div>
+                <div class="platform-item">
+                    <i class="bi bi-twitter-x"></i>
+                    <span>Twitter / X</span>
+                </div>
+                <div class="platform-item">
+                    <i class="bi bi-pin-angle-fill" style="color: #E60023;"></i>
+                    <span>Pinterest</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECURSOS -->
+    <section class="features" id="recursos">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que usar o nosso Bot?</h2>
+                <p>Criado para resolver o problema de compressão e marcas d'água de forma rápida e prática.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-gem"></i>
+                    </div>
+                    <h3>Qualidade Máxima (HD 1080p)</h3>
+                    <p>O WhatsApp costuma comprimir vídeos normais. Ao escolher a opção 2, o bot envia o vídeo como documento original, sem perder 1 pixel de nitidez.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-badge-hd-fill"></i>
+                    </div>
+                    <h3>Sem Marca d'Água</h3>
+                    <p>Baixe vídeos do TikTok 100% limpos e livres de logotipos da plataforma, prontos para você repostar onde quiser.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-music-note-beamed"></i>
+                    </div>
+                    <h3>Extrator de Áudio (MP3)</h3>
+                    <p>Gostou apenas da música de fundo ou fala do vídeo? A opção 3 extrai a faixa de áudio e manda como som pronto para ouvir.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+                    <h3>Super Rápido & Sem Espera</h3>
+                    <p>Diferente de sites cheios de pop-ups e anúncios invasivos, o bot responde em segundos direto na tela de conversa.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3>Funciona em Grupos e no Privado</h3>
+                    <p>Adicione o bot no seu grupo de amigos ou use-o individualmente no seu chat privado para salvar conteúdos favoritos.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-phone-fill"></i>
+                    </div>
+                    <h3>Zero Instalação de Apps</h3>
+                    <p>Você não precisa baixar nenhum aplicativo novo no celular ou computador. Tudo roda dentro do seu próprio WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="how-it-works" id="como-funciona">
+        <div class="container">
+            <div class="section-header">
+                <h2>Como Usar em 3 Passos Simples</h2>
+                <p>Veja como é fácil baixar qualquer vídeo em menos de 10 segundos.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-badge">
+                        <i class="bi bi-chat-dots-fill"></i>
+                    </div>
+                    <h3>1. Abra a Conversa</h3>
+                    <p>Chame o bot no WhatsApp ou mencione-o em um grupo onde ele esteja conectado.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-badge">
+                        <i class="bi bi-link-45deg"></i>
+                    </div>
+                    <h3>2. Envie o Link do Vídeo</h3>
+                    <p>Copie o link do TikTok, Reels ou Shorts que deseja salvar e mande no chat.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-badge">
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+                    <h3>3. Escolha a Opção</h3>
+                    <p>Responda com <strong>1</strong> (Vídeo), <strong>2</strong> (HD sem compressão) ou <strong>3</strong> (Áudio) e receba o arquivo na hora!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Dúvidas Frequentes</h2>
+                <p>Tire suas dúvidas sobre o funcionamento do bot.</p>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>O bot é gratuito?</span>
+                        <i class="bi bi-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Sim! O bot foi criado para ser 100% gratuito e acessível sem limites chatos ou assinaturas.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Qual a diferença entre a Opção 1 e a Opção 2?</span>
+                        <i class="bi bi-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        A Opção 1 envia como vídeo comum, que você assiste direto na janelinha do WhatsApp (mas o WhatsApp reduz um pouco a qualidade). A Opção 2 envia o arquivo original sem nenhuma compressão, ideal para quem quer qualidade pura de estúdio!
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Consigo baixar vídeos de contas privadas?</span>
+                        <i class="bi bi-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Não. Por questões de privacidade das plataformas sociais, apenas vídeos de perfis públicos podem ser baixados.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Preciso instalar alguma coisa no meu celular?</span>
+                        <i class="bi bi-chevron-down faq-icon-chevron"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Nenhum aplicativo adicional! Basta ter o WhatsApp instalado no seu celular ou computador.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <span class="footer-logo">
+                <span>ZapDownloader</span>
+                <i class="bi bi-robot"></i>
+            </span>
+            <p class="footer-text">O seu assistente definitivo para baixar mídias em alta resolução no WhatsApp.</p>
+            <p class="copy">&copy; 2026 ZapDownloader. Desenvolvido por Ronaldo Melo.</p>
+        </div>
+    </footer>
+
+    <!-- INTERATIVIDADE JS -->
+    <script src="script.js"></script>
+</body>
+</html>
