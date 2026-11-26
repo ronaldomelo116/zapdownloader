@@ -1,0 +1,16 @@
+# Dependências do Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ⚠️ CREDENCIAIS E SESSÃO DO WHATSAPP (NUNCA COMPARTILHE!)
+conexao_bot/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Logs e arquivos de ambiente
+*.log
+.env
